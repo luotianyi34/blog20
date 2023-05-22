@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuhai.blog.mapper.WebsiteMapper">
+  <resultMap id="BaseResultMap" type="com.xuhai.blog.bean.Website">
+    <id column="website_id" jdbcType="INTEGER" property="websiteId" />
+    <result column="web_name" jdbcType="VARCHAR" property="webName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="web_profile" jdbcType="VARCHAR" property="webProfile" />
+    <result column="profile" jdbcType="VARCHAR" property="profile" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="userinfo_id" jdbcType="INTEGER" property="userinfoId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_admin" jdbcType="INTEGER" property="createAdmin" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_admin" jdbcType="INTEGER" property="updateAdmin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    website_id, web_name, `name`, web_profile, profile, logo, avatar, userinfo_id, `status`, 
+    create_time, create_admin, update_time, update_admin
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from website
+    where website_id = #{websiteId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from website
+    where website_id = #{websiteId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="website_id" keyProperty="websiteId" parameterType="com.xuhai.blog.bean.Website" useGeneratedKeys="true">
+    insert into website (web_name, `name`, web_profile, 
+      profile, logo, avatar, 
+      userinfo_id, `status`, create_time, 
+      create_admin, update_time, update_admin
+      )
+    values (#{webName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{webProfile,jdbcType=VARCHAR}, 
+      #{profile,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{userinfoId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createAdmin,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateAdmin,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="website_id" keyProperty="websiteId" parameterType="com.xuhai.blog.bean.Website" useGeneratedKeys="true">
+    insert into website
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webName != null">
+        web_name,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="webProfile != null">
+        web_profile,
+      </if>
+      <if test="profile != null">
+        profile,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="userinfoId != null">
+        userinfo_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createAdmin != null">
+        create_admin,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateAdmin != null">
+        update_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webName != null">
+        #{webName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="webProfile != null">
+        #{webProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="userinfoId != null">
+        #{userinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAdmin != null">
+        #{createAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAdmin != null">
+        #{updateAdmin,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuhai.blog.bean.Website">
+    update website
+    <set>
+      <if test="webName != null">
+        web_name = #{webName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="webProfile != null">
+        web_profile = #{webProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="userinfoId != null">
+        userinfo_id = #{userinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAdmin != null">
+        create_admin = #{createAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAdmin != null">
+        update_admin = #{updateAdmin,jdbcType=INTEGER},
+      </if>
+    </set>
+    where website_id = #{websiteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuhai.blog.bean.Website">
+    update website
+    set web_name = #{webName,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      web_profile = #{webProfile,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      userinfo_id = #{userinfoId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_admin = #{createAdmin,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_admin = #{updateAdmin,jdbcType=INTEGER}
+    where website_id = #{websiteId,jdbcType=INTEGER}
+  </update>
+</mapper>

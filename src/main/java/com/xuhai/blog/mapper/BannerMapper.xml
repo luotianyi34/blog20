@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuhai.blog.mapper.BannerMapper">
+    <resultMap id="BaseResultMap" type="com.xuhai.blog.bean.Banner">
+        <id column="banner_id" jdbcType="INTEGER" property="bannerId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="src" jdbcType="VARCHAR" property="src"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="target" jdbcType="VARCHAR" property="target"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="userinfo_id" jdbcType="INTEGER" property="userinfoId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_admin" jdbcType="INTEGER" property="createAdmin"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_admin" jdbcType="INTEGER" property="updateAdmin"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        banner_id, `name`, src, url, target, order_num, `type`, userinfo_id, `status`, create_time,
+    create_admin, update_time, update_admin
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from banner
+        where banner_id = #{bannerId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from banner
+        where banner_id = #{bannerId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="banner_id" keyProperty="bannerId" parameterType="com.xuhai.blog.bean.Banner"
+            useGeneratedKeys="true">
+        insert into banner (`name`, src, url,
+                            target, order_num, `type`,
+                            userinfo_id, `status`, create_time,
+                            create_admin, update_time, update_admin)
+        values (#{name,jdbcType=VARCHAR}, #{src,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+                #{target,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+                #{userinfoId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+                #{createAdmin,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateAdmin,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="banner_id" keyProperty="bannerId" parameterType="com.xuhai.blog.bean.Banner"
+            useGeneratedKeys="true">
+        insert into banner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="src != null">
+                src,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="target != null">
+                target,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="userinfoId != null">
+                userinfo_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createAdmin != null">
+                create_admin,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateAdmin != null">
+                update_admin,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="src != null">
+                #{src,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                #{target,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="userinfoId != null">
+                #{userinfoId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createAdmin != null">
+                #{createAdmin,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAdmin != null">
+                #{updateAdmin,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xuhai.blog.bean.Banner">
+        update banner
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="src != null">
+                src = #{src,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                target = #{target,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="userinfoId != null">
+                userinfo_id = #{userinfoId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createAdmin != null">
+                create_admin = #{createAdmin,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAdmin != null">
+                update_admin = #{updateAdmin,jdbcType=INTEGER},
+            </if>
+        </set>
+        where banner_id = #{bannerId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xuhai.blog.bean.Banner">
+        update banner
+        set `name`       = #{name,jdbcType=VARCHAR},
+            src          = #{src,jdbcType=VARCHAR},
+            url          = #{url,jdbcType=VARCHAR},
+            target       = #{target,jdbcType=VARCHAR},
+            order_num    = #{orderNum,jdbcType=INTEGER},
+            `type`       = #{type,jdbcType=INTEGER},
+            userinfo_id  = #{userinfoId,jdbcType=INTEGER},
+            `status`     = #{status,jdbcType=INTEGER},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            create_admin = #{createAdmin,jdbcType=INTEGER},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP},
+            update_admin = #{updateAdmin,jdbcType=INTEGER}
+        where banner_id = #{bannerId,jdbcType=INTEGER}
+    </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        select * from banner
+        <where>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by banner_id desc
+    </select>
+</mapper>

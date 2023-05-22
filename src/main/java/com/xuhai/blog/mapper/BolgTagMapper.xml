@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuhai.blog.mapper.BolgTagMapper">
+    <resultMap id="BaseResultMap" type="com.xuhai.blog.bean.BolgTag">
+        <id column="blog_tag_id" jdbcType="INTEGER" property="blogTagId"/>
+        <result column="blog_id" jdbcType="INTEGER" property="blogId"/>
+        <result column="tag_id" jdbcType="INTEGER" property="tagId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        blog_tag_id, blog_id, tag_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bolg_tag
+        where blog_tag_id = #{blogTagId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from bolg_tag
+        where blog_tag_id = #{blogTagId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="blog_tag_id" keyProperty="blogTagId" parameterType="com.xuhai.blog.bean.BolgTag"
+            useGeneratedKeys="true">
+        insert into bolg_tag (blog_id, tag_id)
+        values (#{blogId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="blog_tag_id" keyProperty="blogTagId"
+            parameterType="com.xuhai.blog.bean.BolgTag" useGeneratedKeys="true">
+        insert into bolg_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blogId != null">
+                blog_id,
+            </if>
+            <if test="tagId != null">
+                tag_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blogId != null">
+                #{blogId,jdbcType=INTEGER},
+            </if>
+            <if test="tagId != null">
+                #{tagId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xuhai.blog.bean.BolgTag">
+        update bolg_tag
+        <set>
+            <if test="blogId != null">
+                blog_id = #{blogId,jdbcType=INTEGER},
+            </if>
+            <if test="tagId != null">
+                tag_id = #{tagId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where blog_tag_id = #{blogTagId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xuhai.blog.bean.BolgTag">
+        update bolg_tag
+        set blog_id = #{blogId,jdbcType=INTEGER},
+            tag_id  = #{tagId,jdbcType=INTEGER}
+        where blog_tag_id = #{blogTagId,jdbcType=INTEGER}
+    </update>
+
+    <select id="getTagByBlogId" resultType="com.xuhai.blog.bean.Tag" parameterType="int">
+        select t.*
+        from bolg_tag bt
+                 left join tag t on bt.tag_id = t.tag_id
+        where bt.blog_id = #{blogId}
+    </select>
+
+    <select id="getBlogByTageId" resultMap="com.xuhai.blog.mapper.BlogMapper.BaseResultMap">
+        select b.*
+        from bolg_tag bt
+                 left join blog b on bt.blog_id = b.blog_id
+        where b.blog_status = 1
+          and b.status = 1
+          and bt.tag_id = #{tagId}
+        order by b.apply_time desc
+    </select>
+
+    <delete id="deleteByBlogId">
+        delete
+        from bolg_tag
+        where blog_id = #{blogId}
+    </delete>
+
+    <insert id="batchInsert">
+        insert into bolg_tag values
+        <foreach collection="list" item="bt" separator=",">
+            (null,#{bt.blogId},#{bt.tagId})
+        </foreach>
+    </insert>
+</mapper>

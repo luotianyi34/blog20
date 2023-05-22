@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuhai.blog.mapper.TimelineMapper">
+    <resultMap id="timeMap" type="com.xuhai.blog.bean.Timeline">
+        <result column="year" property="year"/>
+        <result column="count" property="count"/>
+        <collection property="blogList" column="{year=year,limit=li}" select="getBlogByYear"/>
+    </resultMap>
+    <select id="getTimeline" resultMap="timeMap">
+        select count(blog_id) count, SUBSTR(apply_time FROM 1 FOR 4) year, 3 li
+        from blog
+        where status = 1
+          and blog_status = 1
+        group by year
+    </select>
+
+    <select id="getBlogByYear" resultType="com.xuhai.blog.bean.Blog">
+        select *
+        from blog
+        where status = 1 and blog_status = 1 and apply_time like concat('%', #{year}, '%') order by read_count desc
+        <if test="limit != null">
+            limit #{limit}
+        </if>
+    </select>
+
+    <select id="getTagCount" resultType="com.xuhai.blog.bean.Timeline">
+        select count(b.blog_id) count, t.`name` year
+        from blog b
+                 left join bolg_tag bt on b.blog_id = bt.blog_id
+                 left join tag t on bt.tag_id = t.tag_id
+        group by bt.tag_id
+    </select>
+
+    <select id="getCategoryCount" resultType="com.xuhai.blog.bean.Timeline">
+        select count(b.blog_id) count, t.`name` year
+        from blog b
+                 left join tag t on b.category_id = t.tag_id
+        group by b.category_id;
+    </select>
+</mapper>

@@ -1,0 +1,126 @@
+
+.main .banner {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main .banner img {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.main .hot {
+    padding-top: 80px;
+}
+
+.main .hot .info {
+    width: 1080px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.main .hot .info .list {
+    width: 800px;
+    height: 100%;
+}
+
+.main .hot .info .list .blog-item {
+    background-color: white;
+    margin: 15px;
+    padding: 15px;
+}
+
+.main .hot .info .list .blog-item .blog-title {
+    height: 30px;
+}
+
+.main .hot .info .list .blog-item .blog-title h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    line-height: 30px;
+}
+
+.main .hot .info .list .blog-item .blog-title h2 a {
+    color: black;
+}
+
+.main .hot .info .list .blog-item .blog-title h2 a:hover {
+    color: #7c8ce4;
+}
+
+.main .hot .info .list .blog-item .blog-profile {
+    height: 50px;
+}
+
+.main .hot .info .list .blog-item .blog-profile p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.main .hot .info .list .blog-item .blog-info {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .hot .info .list .blog-item .blog-tag {
+    height: 40px;
+    display: flex;
+}
+
+.main .hot .info .user {
+    width: 280px;
+    height: 340px;
+    background-color: white;
+    margin: 15px;
+}
+
+.main .hot .info .user .avatar {
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .hot .info .user .avatar .avatar-img {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.main .hot .info .user .avatar .avatar-img img {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.main .hot .info .user .name h4 {
+    text-align: center;
+    font-size: 24px;
+    height: 60px;
+    line-height: 60px;
+}
+
+.main .hot .info .user .profile p {
+    text-align: center;
+}
+
+.back-top {
+    height: 50px;
+    width: 50px;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+}

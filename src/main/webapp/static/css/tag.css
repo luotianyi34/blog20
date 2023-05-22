@@ -1,0 +1,19 @@
+.main .hot .info {
+    width: 960px;
+    flex-direction: column;
+}
+
+.main .hot .category {
+    flex-direction: row;
+}
+
+.main .hot .info .list {
+    width: 100%;
+}
+
+.main .hot .info .page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--配置spring注解扫描范围-->
+    <context:component-scan base-package="com.xuhai.blog"/>
+    <!--开启SpringMVC的注解功能-->
+    <mvc:annotation-driven/>
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--配置静态资源路径-->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <!--配置JSON解析器-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--引入数据库配置信息-->
+    <context:property-placeholder location="classpath:../resources/db.properties"/>
+    <!--配置数据源-->
+    <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--配置mybatis的session工厂-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--配置实体类别名-->
+        <property name="typeAliasesPackage" value="com.xuhai.blog.bean"/>
+        <!--加载配置属性-->
+        <property name="configuration">
+            <!--设置配置属性-->
+            <bean class="org.apache.ibatis.session.Configuration">
+                <!--设置驼峰命名自动转化-->
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+                <!--解决mybatis关联查询缓存引用的问题-->
+                <property name="aggressiveLazyLoading" value="true"/>
+                <property name="lazyLoadingEnabled" value="true"/>
+            </bean>
+        </property>
+        <!--配置插件-->
+        <property name="plugins">
+            <array>
+                <!--配置分页插件-->
+                <bean class="com.github.pagehelper.PageHelper"/>
+            </array>
+        </property>
+    </bean>
+    <!--配置mapper文件映射器-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.xuhai.blog.mapper"/>
+    </bean>
+
+    <!--配置Spring的事务管理器-->
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--注解式事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--配置上传组件-->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="5200000"/>
+    </bean>
+
+    <!--配置登录拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--配置需要被拦截的地址规则-->
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/nologin"/>
+            <mvc:exclude-mapping path="/static/**"/>
+            <mvc:exclude-mapping path="/front/**"/>
+            <bean class="com.xuhai.blog.util.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
