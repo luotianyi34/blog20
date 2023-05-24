@@ -29,7 +29,7 @@ public class FrontCommentController {
         List<Comment> list = pageInfo.getList();
         if (list != null && list.size() > 0) {
             /*加载关键字列表*/
-            SensitiveWordFilter.loadWordFromFile("D:\\记录\\OneDrive\\学校资料\\徐海学院\\2022-2023-2\\04.JavaEE框架开发-48课时-嵌入式20-1\\代码\\blog\\src\\main\\resources\\WorldList.txt");
+            SensitiveWordFilter.loadWordFromFile("C:\\Users\\df\\IdeaProjects\\blog\\src\\main\\resources\\WorldList.txt");
             for (Comment c : list) {
                 c.setContent(SensitiveWordFilter.Filter(c.getContent()));
             }

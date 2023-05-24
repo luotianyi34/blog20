@@ -29,7 +29,7 @@
     </mvc:annotation-driven>
 
     <!--引入数据库配置信息-->
-    <context:property-placeholder location="classpath:../resources/db.properties"/>
+    <context:property-placeholder location="classpath:db.properties"/>
     <!--配置数据源-->
     <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>

@@ -9,16 +9,19 @@
     <link rel="stylesheet" href="static/css/nav.css">
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="static/css/tag.css">
+    <link rel="stylesheet" href="static/css/cursor.css">
     <script src="static/x-admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="static/x-admin/js/jquery.min.js"></script>
     <script src="static/js/website.js"></script>
 </head>
 <body>
 <div class="main">
-    <div class="nav nav-fixed layui-row">
+    <div class="nav nav-relative layui-row">
         <div class="title layui-col-md3">
-            <div class="logo">
-                <img src="static/x-admin/images/q.jpg" alt="">
+            <div class="logo" style="cursor: pointer">
+                <a id="" href="front/home">
+                    <img src="static/x-admin/images/1daw.png" alt="">
+                </a>
             </div>
             <div class="web-name">
                 <h1>我的博客</h1>
@@ -30,7 +33,7 @@
                 <li><a href="front/category">分类</a></li>
                 <li><a class="active" href="front/tag">标签</a></li>
                 <li><a href="front/timeline">时光</a></li>
-                <li><a href="front/user">信息</a></li>
+                <li><a href="login">后台</a></li>
             </ul>
         </div>
     </div>
@@ -44,6 +47,37 @@
     </div>
 </div>
 </body>
+<script src="static/js/cursor.js"></script>
+<script type="text/javascript">
+    /* 鼠标特效 */
+    var a_idx = 0;
+    jQuery(document).ready(function($) {
+        $("body").click(function(e) {
+            var a = new Array("❤zakozako❤","❤suki❤","❤王天润sama～❤");
+            var $i = $("<span></span>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+                y = e.pageY;
+            $i.css({
+                "z-index": 999,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"
+            });
+            $("body").append($i);
+            $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                },
+                1500,
+                function() {
+                    $i.remove();
+                });
+        });
+    });
+</script>
 <script>
     let page = 1;
     let laypage;

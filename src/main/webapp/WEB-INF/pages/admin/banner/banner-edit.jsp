@@ -95,6 +95,20 @@
                        value="${banner.orderNum}" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="url">导航</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" id="url" placeholder="请输入导航文章" autocomplete="off"
+                       value="${banner.url}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="name">图片简介</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" id="name" placeholder="请输入图片简介" autocomplete="off"
+                       value="${banner.name}" class="layui-input">
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label" for="status">状态</label>

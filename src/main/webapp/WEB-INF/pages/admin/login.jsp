@@ -23,7 +23,7 @@
 <body class="login-bg">
 
 <div class="login layui-anim layui-anim-up">
-    <div class="message">博客系统后台管理</div>
+    <div class="message">ACG论坛后台管理</div>
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form">

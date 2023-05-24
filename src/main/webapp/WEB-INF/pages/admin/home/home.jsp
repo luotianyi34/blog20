@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <base href="${basePath}">
-    <title>我的博客后台管理</title>
+    <title>ACG论坛后台管理</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -32,7 +32,7 @@
 <!-- 顶部开始 -->
 <div class="container">
     <div class="logo">
-        <a href="home">我的博客后台管理</a></div>
+        <a href="home">ACG论坛后台管理</a></div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
     </div>
@@ -89,9 +89,9 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:;" onclick="xadmin.add_tab('博客管理','blog/list',true)">
-                    <i class="iconfont left-nav-li" lay-tips="博客管理">&#xe6fb;</i>
-                    <cite>博客管理</cite>
+                <a href="javascript:;" onclick="xadmin.add_tab('文章管理','blog/list',true)">
+                    <i class="iconfont left-nav-li" lay-tips="文章管理">&#xe6fb;</i>
+                    <cite>文章管理</cite>
                 </a>
             </li>
             <li>
@@ -104,6 +104,12 @@
                 <a href="javascript:;" onclick="xadmin.add_tab('网站管理','website/info',true)">
                     <i class="iconfont left-nav-li" lay-tips="网站管理">&#xe6ae;</i>
                     <cite>网站管理</cite>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" id="logout1">
+                    <i class="iconfont left-nav-li" lay-tips="退出">&#xe697;</i>
+                    <cite>退出</cite>
                 </a>
             </li>
         </ul>
@@ -144,16 +150,15 @@
         const layer = layui.layer
         $("#logout").click(function () {
             layer.confirm("确定退出系统吗?", {icon: 3}, function (index) {
-                // $.ajax({
-                //     url:"logout",
-                //     method:"post",
-                //     dataType:"json",
-                //     success:res=>{
-                //         if(res.code === 200){
-                //             location.href="/"
-                //         }
-                //     }
-                // })
+
+                $.post("logout", () => {
+                    top.location.replace("${basePath}")
+                })
+                layer.close(index);
+            })
+        })
+        $("#logout1").click(function () {
+            layer.confirm("确定退出系统吗?", {icon: 3}, function (index) {
 
                 $.post("logout", () => {
                     top.location.replace("${basePath}")

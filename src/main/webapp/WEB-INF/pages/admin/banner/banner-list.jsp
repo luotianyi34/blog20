@@ -96,6 +96,8 @@
             cols: [[
                 {title: "编号", field: "bannerId"},
                 {title: "排序值", field: "orderNum"},
+                {title: "图片简介",field: "name"},
+                {title:"导航",field: "url"},
                 {title: "地址", field: "src", templet: "#srcTemp"},
                 {title: "状态", field: "status", templet: "#statusTemp"},
                 {title: "操作", fixed: "right", templet: "#optTemp"}

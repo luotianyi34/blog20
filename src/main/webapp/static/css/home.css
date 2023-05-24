@@ -1,17 +1,91 @@
 
 .main .banner {
-    height: 100vh;
+    height: 400px;
     overflow: hidden;
+    position: relative;
 }
-
-.main .banner img {
-    display: block;
+.main .contain {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+.main .opt{
     height: 100%;
     width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
+.main .opt .allow{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 185px;
+    font-size: 42px;
+    color: white;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+    cursor: pointer;
 
+}
+.main .opt .left{
+    left: 300px;
+    text-align: center;
+    z-index: 2;
+    border-radius: 100%;
+}
+.main .opt .left:hover{
+    background-color: rgb(0,195,255);
+}
+.main .opt .right{
+    right: 300px;
+    text-align: center;
+    z-index: 2;
+    border-radius: 100%;
+}
+.main .opt .right:hover{
+    background-color: rgb(0,195,255);
+}
+.main .opt .dots{
+    height: 20px;
+    width: 150px;
+    background-color: rgba(0,0,0,0.4);
+    position: absolute;
+    bottom: 0;
+    left: 650px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 5px;
+
+}
+.main .opt .dots .dot {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: gray;
+    cursor: pointer;
+}
+.main .opt .dots .dot.active {
+    height:15px;
+    width: 15px;
+    border:1px solid black;
+    background-color: rgb(0,195,255);
+}
+.main .banner img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    height: 320px;
+    width: 690px;
+}
 .main .hot {
-    padding-top: 80px;
+    padding-top: 0px;
 }
 
 .main .hot .info {
@@ -29,6 +103,7 @@
     background-color: white;
     margin: 15px;
     padding: 15px;
+    border-bottom: gray dashed 3px;
 }
 
 .main .hot .info .list .blog-item .blog-title {
@@ -68,12 +143,22 @@
     align-items: center;
     justify-content: space-between;
 }
+.main .hot .info .list .blog-item .blog-read {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    padding-left: 660px;
+}
 
 .main .hot .info .list .blog-item .blog-tag {
     height: 40px;
     display: flex;
 }
-
+.main .hot .info .list .blog-item .blog-tag .tag-success {
+    z-index: 2;
+}
 .main .hot .info .user {
     width: 280px;
     height: 340px;
@@ -92,14 +177,17 @@
     height: 200px;
     width: 200px;
     overflow: hidden;
-    border-radius: 50%;
 }
 
 .main .hot .info .user .avatar .avatar-img img {
     height: 100%;
     width: 100%;
     display: block;
+    border-radius: 30%;
 }
+.main .hot .info .user .avatar .avatar-img img:hover {
+    transform: scale(1.1,1.1);
+ }
 
 .main .hot .info .user .name h4 {
     text-align: center;
@@ -121,6 +209,6 @@
     justify-content: center;
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 100px;
     cursor: pointer;
 }
